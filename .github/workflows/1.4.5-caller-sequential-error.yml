@@ -5,13 +5,13 @@ on:
 
 jobs:
   dev:    
-    uses: ./.github/workflows/4.1-reusable-wf1.yml
+    uses: ./.github/workflows/1.4.1-reusable-wf1.yml
     with:
       username: Deploy to dev
 
   test: 
       needs: dev   
-      uses: ./.github/workflows/4.1-reusable-wf1.yml
+      uses: ./.github/workflows/1.4.1-reusable-wf1.yml
       with:
         username: Unit Test  
   lint:   
@@ -30,7 +30,7 @@ jobs:
     
   staging: 
       needs: [test,lint] 
-      uses: ./.github/workflows/4.1-reusable-wf1.yml
+      uses: ./.github/workflows/1.4.1-reusable-wf1.yml
       with:
         username: Staging deployment
   

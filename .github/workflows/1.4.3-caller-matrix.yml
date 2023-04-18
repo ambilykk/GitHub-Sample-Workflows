@@ -9,7 +9,7 @@ jobs:
       matrix:
         names: [John Paul, Anuradha, Gauri]
     
-    uses: ./.github/workflows/4.1-reusable-wf1.yml
+    uses: ./.github/workflows/1.4.1-reusable-wf1.yml
     with:
       username: ${{ matrix.names }}   
       

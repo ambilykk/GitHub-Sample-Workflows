@@ -1,0 +1,44 @@
+# define a workflow to publish the maven package to GitHUb Packages
+# invoke on workflow_dispatch event
+# note: modify env variables defined in the workflow 
+
+name: Publish Maven package to GitHub Packages
+
+on:  
+  workflow_dispatch:
+
+env:
+  GROUP_ID: com.amb.app
+  ARTIFACT_ID: amb-app
+  VERSION: 1.0-SNAPSHOT
+  CLASS_NAME: PublishApp
+  SETTINGS_FILE: settings.xml
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Build package
+        run: mvn package --no-transfer-progress
+
+      - name: Run package
+        run: java -cp target/${{ env.ARTIFACT_ID }}-${{ env.VERSION }}.jar ${{ env.GROUP_ID }}.${{ env.CLASS_NAME }}
+
+      - name: Deploy package
+        run: mvn deploy --settings ${{ env.SETTINGS_FILE }} -DaltDeploymentRepository=github::default::https://maven.pkg.github.com/${{ github.repository }} --no-transfer-progress
+        env:
+          GITHUB_TOKEN: ${{ github.token }} # GITHUB_TOKEN is the default env for the password
+
+      - name: Trigger maven-install workflow
+        if: ${{ env.GITHUB_TOKEN != null }}
+        run: gh api repos/${{ github.repository_owner }}/maven-install/dispatches <<< '{"event_type":"build"}' --input -
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}

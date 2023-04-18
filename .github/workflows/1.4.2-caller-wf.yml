@@ -5,10 +5,10 @@ on:
 
 jobs:
   dev:   
-    uses: ./.github/workflows/4.1-reusable-wf1.yml
+    uses: ./.github/workflows/1.4.1-reusable-wf1.yml
     with:
       username: Vishnu   
   test:   
-    uses: ./.github/workflows/4.1-reusable-wf1.yml
+    uses: ./.github/workflows/1.4.1-reusable-wf1.yml
     with:
       username: Mathew   
