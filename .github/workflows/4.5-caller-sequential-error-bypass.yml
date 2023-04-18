@@ -1,0 +1,38 @@
+name: Sequestial Orchestrator - Error Bypass
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dev:    
+    uses: ./.github/workflows/4.1-reusable-wf1.yml
+    with:
+      username: Deploy to dev
+
+  test: 
+      needs: dev   
+      uses: ./.github/workflows/4.1-reusable-wf1.yml
+      with:
+        username: Unit Test  
+  lint:   
+      needs: dev
+      runs-on: ubuntu-latest
+      steps:
+        - name: Step 1
+          uses: ./.github/workflows/4.1-reusable-wf1
+          with:
+           username: Linting
+        
+        - name: throw error
+          run: |
+               echo "throwing error"
+               exit 1
+    
+  staging: 
+      needs: [test,lint] 
+      if: ${{ always() }}  
+      uses: ./.github/workflows/4.1-reusable-wf1.yml
+      with:
+        username: Staging deployment
+  
+        

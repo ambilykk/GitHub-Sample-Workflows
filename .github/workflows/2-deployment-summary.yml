@@ -1,0 +1,26 @@
+name: Deployment Summary
+
+on:
+  workflow_dispatch:
+
+jobs:
+  summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Summary report
+        run: |
+         echo "### :fire: Alert Summary " >> $GITHUB_STEP_SUMMARY
+         echo " **Event name**:  ${{ github.event_name }} " >> $GITHUB_STEP_SUMMARY
+         echo " **Repository name**:  ${{ github.event.repository.name }}" >> $GITHUB_STEP_SUMMARY         
+       
+      - name: Alert Summary       
+        uses: actions/github-script@v6       
+        with:
+          script: |
+            core.summary.addHeading(`:fire: Alert Summary`, 3);
+            const rows = [
+              ['User name', "${{ github.actor }}"],
+              ['Repository name', "${{ github.event.repository.name }}"]             
+            ];
+            core.summary.addTable(rows);
+            await core.summary.write();

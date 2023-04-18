@@ -1,0 +1,15 @@
+name: Caller to test Reusable WF Matrix
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dev:
+    strategy:
+      matrix:
+        names: [John Paul, Anuradha, Gauri]
+    
+    uses: ./.github/workflows/4.1-reusable-wf1.yml
+    with:
+      username: ${{ matrix.names }}   
+      

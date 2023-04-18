@@ -1,0 +1,29 @@
+name: Sequestial Orchestrator
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dev:    
+    uses: ./.github/workflows/4.1-reusable-wf1.yml
+    with:
+      username: Deploy to dev
+
+  test: 
+      needs: dev   
+      uses: ./.github/workflows/4.1-reusable-wf1.yml
+      with:
+        username: Unit Test  
+  lint:   
+      needs: dev
+      uses: ./.github/workflows/4.1-reusable-wf1.yml
+      with:
+        username: Linting 
+    
+  staging: 
+      needs: [test,lint]   
+      uses: ./.github/workflows/4.1-reusable-wf1.yml
+      with:
+        username: Staging deployment
+  
+        

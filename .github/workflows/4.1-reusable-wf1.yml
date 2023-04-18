@@ -1,0 +1,17 @@
+name: reusable sample workflow
+on:
+    workflow_call:
+      inputs:
+        username:
+          description: 'A username passed from the caller workflow'
+          required: true
+          type: string
+  
+jobs:
+    display-username:
+      runs-on: ubuntu-latest
+  
+      steps:
+        - name: display
+          run: echo The username is ${{ inputs.username }}
+  

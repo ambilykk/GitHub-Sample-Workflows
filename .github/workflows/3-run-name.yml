@@ -1,0 +1,12 @@
+name: Run name sample
+run-name: Deployment by ${{ github.actor }}
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run name sample
+        run: echo Hello from action

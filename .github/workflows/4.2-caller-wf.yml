@@ -1,0 +1,14 @@
+name: Caller to test Reusable WF
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dev:   
+    uses: GitHub-Sample-Workflows/.github/workflows/4.1-reusable-wf1.yml@main
+    with:
+      username: Vishnu   
+  test:   
+    uses: ./.github/workflows/4.1-reusable-wf1.yml
+    with:
+      username: Mathew   
