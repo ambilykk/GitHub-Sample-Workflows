@@ -19,5 +19,5 @@ Name | Type | Description
 [**`Sequential execution of Jobs`** ](./.github/workflows/1.4.4-caller-sequestial.yml) | Concept | Sequential execution of reuable workflow 
 [**`Sequential execution of Jobs with Error`** ](./.github/workflows/1.4.5-caller-sequestial.yml) | Concept | Skipping jobs based on dependent job failure
 [**`Sequential execution of Jobs with error bypass`** ](./.github/workflows/1.4.6-caller-sequestial.yml) | Concept | Continue execution of jobs, even if there is dependent job failures
-[**`Publishing NPM Module to GitHub Package`** ](./.github/workflows/3.1-publish-npm-module-gh-package.yml) | Concept | Publish npm module to GitHub Packages registry
-[**`Publishing Maven Package to GitHub Package`** ](./.github/workflows/3.2-publish-maven-pkg-gh-package.yml) | Concept | Publish Maven package to GitHub Packages registry
+[**`Publishing NPM Module to GitHub Package`** ](./.github/workflows/3.1-publish-npm-module-gh-package.yml) | Publish | Publish npm module to GitHub Packages registry
+[**`Publishing Maven Package to GitHub Package`** ](./.github/workflows/3.2-publish-maven-pkg-gh-package.yml) | Publish | Publish Maven package to GitHub Packages registry
